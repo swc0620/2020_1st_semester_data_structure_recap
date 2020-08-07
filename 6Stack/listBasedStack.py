@@ -76,29 +76,46 @@ class LinkedList():
         self.head = None
         self.numItems = 0
 
-aLinkedList = LinkedList()
-aLinkedList.add(1, "first")
-aLinkedList.add(2, "second")
-aLinkedList.add(3, "third")
-aLinkedList.add(4, "fourth")
-aLinkedList.add(5, "fifth")
-aLinkedList.add(8, "eighth")
+class Stack():
+    def __init__(self):
+        self.list = LinkedList()
 
-print(aLinkedList.get(1))
-print(aLinkedList.get(2))
-print(aLinkedList.get(3))
-print(aLinkedList.get(4))
-print(aLinkedList.get(5))
+    def isEmpty(self):
+        return self.list.isEmpty()
 
-aLinkedList.remove(1)
-aLinkedList.remove(5)
+    def push(self, newItem):
+        self.list.add(1, newItem)
 
-print(aLinkedList.get(1))
-print(aLinkedList.get(2))
-print(aLinkedList.get(3))
+    def pop(self):
+        try:
+            if not self.list.isEmpty():
+                temp = self.list.get(1)
+                self.list.remove(1)
+                return temp
+            else:
+                raise Error()
+        except Error:
+            print("stack is empty")
 
-aLinkedList.remove(4)
+    def popAll(self):
+        self.list.removeAll()
 
-print(aLinkedList.get(1))
-print(aLinkedList.get(4))
-print(aLinkedList.get(3))
+    def peek(self):
+        try:
+            if not self.isEmpty():
+                return self.list.get(1)
+            else:
+                raise Error()
+        except Error:
+            print("stack is empty")
+
+stack = Stack()
+stack.push(1)
+stack.push(2)
+stack.push(3)
+print(stack.peek())
+stack.push(4)
+stack.push(5)
+print(stack.peek())
+stack.pop()
+print(stack.peek())
